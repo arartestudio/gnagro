@@ -1,0 +1,48 @@
+SITE GN AGROPECUÁRIA — COMO ABRIR E AJUSTAR
+=============================================
+
+COMO VER O SITE
+----------------
+Dê duplo clique em "index.html" — ele abre no seu navegador.
+É um site 100% funcional, já com fotos e vídeo reais do banco de vocês.
+Para publicar de verdade (endereço próprio, tipo gnagropecuaria.com.br),
+essa pasta inteira precisa ser hospedada (posso te ajudar com isso depois).
+
+O QUE JÁ ESTÁ PRONTO
+---------------------
+- Todo o conteúdo do PDF (trajetória, números, operação, parceria,
+  sustentabilidade, contato).
+- Fotos reais do banco de vocês em cada seção (pasta images/).
+- Galeria com 24 fotos (images/gallery/) — clique numa foto pra abrir
+  em tela cheia, com seta pra navegar.
+- O showreel de vocês como um "intervalo cinematográfico" no meio do
+  site (video/manifesto.mp4) — clica pra tocar, com som.
+
+PENDÊNCIA: LOGO OFICIAL
+-------------------------
+O cabeçalho do site está usando um monograma "GN" provisório em texto.
+Me manda o arquivo oficial da logo (de preferência .svg ou .png com
+fundo transparente, em alta resolução) que eu troco na hora.
+
+TROCAR UMA FOTO DE SEÇÃO
+--------------------------
+Cada seção usa um arquivo com nome fixo dentro de images/:
+  hero.jpg              → capa do site
+  trajetoria.jpg         → seção "Nossa Trajetória"
+  boitel-pessoa.jpg      → card "Boitel"
+  agricultura.jpg        → card "Agricultura"
+  gestao.jpg              → card "Gestão e Tecnologia"
+  sustentabilidade.jpg    → seção "Sustentabilidade"
+  contato-novo.jpg        → seção "Contato"
+  manifesto-poster.jpg    → capa do vídeo (aparece antes de tocar)
+
+Pra trocar, é só salvar a foto nova por cima com o MESMO nome de arquivo.
+Não precisa mexer em nada do código.
+
+TROCAR/ADICIONAR FOTOS DA GALERIA
+------------------------------------
+Estão em images/gallery/, nomeadas g01.jpg até g24.jpg. Pode substituir
+qualquer uma mantendo o nome, ou me pedir pra eu trocar a seleção por
+outras fotos do banco.
+
+Qualquer ajuste de cor, texto, seção ou nova foto, é só me chamar.
