@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GN Agropecuária: sete décadas de evolução na pecuária de corte</title>
-<meta name="description" content="GN Agropecuária: boitel de alta eficiência, agricultura de precisão e gestão orientada por dados. Sete décadas de tradição e tecnologia na pecuária de corte.">
+<title>GN Agropecuária: seis décadas de evolução na pecuária de corte</title>
+<meta name="description" content="GN Agropecuária: boitel de alta eficiência, agricultura de precisão e gestão orientada por dados. Seis décadas de tradição e tecnologia na pecuária de corte.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,340;9..144,440;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -96,56 +96,46 @@
   .menu-toggle span{width:22px;height:1.4px;background:#fff;}
   header.scrolled .menu-toggle span{background:var(--verde);}
 
-  /* seletor de idioma — apenas as bandeiras por enquanto, traducao entra depois */
+  /* seletor de idioma */
   .lang-switch{display:flex;align-items:center;gap:7px;}
   .lang-switch button{background:none;border:none;padding:3px;cursor:pointer;font-size:16px;line-height:1;opacity:.4;filter:grayscale(.25) saturate(.8);transition:opacity .25s ease,transform .25s ease,filter .25s ease;border-radius:5px;}
   .lang-switch button.active{opacity:1;filter:none;}
   .lang-switch button:hover{opacity:1;transform:translateY(-1px);filter:none;}
-  #langNote{
-    position:fixed;top:78px;left:50%;transform:translateX(-50%) translateY(-8px);
-    background:rgba(29,28,24,.92);color:#fff;font-size:12px;letter-spacing:.03em;
-    padding:10px 18px;border-radius:999px;opacity:0;pointer-events:none;
-    transition:opacity .25s ease,transform .25s ease;z-index:200;white-space:nowrap;
-  }
-  #langNote.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
-  /* SEQHERO — a marca gera o conteudo: sequencia de quadros (logo -> folha -> aereo -> confinamento -> animal) pinada por scroll */
-  .seqhero{position:relative;height:400vh;background:#050705;}
-  .seqhero-pin{position:sticky;top:0;height:100vh;overflow:hidden;background:#050705;}
-  .seqhero-pin canvas{position:absolute;inset:0;width:100%;height:100%;display:block;transform-origin:52% 45%;}
-  .seqhero-pin canvas.idle{animation:seqBreathe 7s ease-in-out infinite;}
-  @keyframes seqBreathe{0%,100%{transform:scale(1);}50%{transform:scale(1.018);}}
-  .seqhero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(5,7,5,.15) 0%,rgba(5,7,5,.1) 45%,rgba(5,7,5,.78) 100%);}
-  .seqhero-content{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;color:#fff;}
-  .seqhero-content .container{width:100%;padding-bottom:76px;}
-  .seqhero-text{opacity:0;pointer-events:none;transition:opacity .3s;}
-  .seqhero-text.active{opacity:1;pointer-events:auto;}
+  /* HERO SLIDER — fotos fortes alternando sozinhas, titulo fixo por cima, sem scroll-lock */
+  .hero-slider{position:relative;height:100vh;min-height:640px;overflow:hidden;background:#050705;}
+  .hs-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.6s ease;filter:contrast(1.08) saturate(1.14) brightness(.98);}
+  .hs-slide.active{opacity:1;animation:heroKen 8s ease-in-out forwards;}
+  @keyframes heroKen{from{transform:scale(1);}to{transform:scale(1.06);}}
+  .hs-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(8,12,8,.05) 0%,rgba(8,12,8,.05) 40%,rgba(6,10,6,.82) 100%);}
+  .hs-scrim::before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(6,10,6,.32),transparent 55%);}
+  .hs-dots{position:absolute;top:100px;left:28px;z-index:3;display:flex;gap:7px;}
+  .hs-dots span{width:24px;height:2px;background:rgba(255,255,255,.28);display:block;cursor:pointer;transition:background .3s ease;}
+  .hs-dots span.active{background:#e7d9b8;}
+  .hero-content{position:relative;z-index:2;height:100%;display:flex;align-items:flex-end;color:#fff;}
+  .hero-content .container{width:100%;padding-bottom:76px;}
   .hero-row{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;flex-wrap:wrap;}
   .hero-eyebrow{
     font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-bottom:26px;
-    opacity:0;transform:translateY(20px);transition:opacity .8s ease .1s,transform .8s ease .1s;
+    opacity:0;animation:heroUp .9s cubic-bezier(.16,.84,.44,1) .15s forwards;
   }
-  .seqhero-text.active .hero-eyebrow{opacity:1;transform:translateY(0);}
   .hero-row h1{
     font-size:clamp(40px,7.6vw,96px);font-weight:420;line-height:.98;max-width:1000px;letter-spacing:-.02em;
-    opacity:0;transform:translateY(20px);transition:opacity .9s ease .22s,transform .9s ease .22s;
+    opacity:0;animation:heroUp 1.05s cubic-bezier(.16,.84,.44,1) .32s forwards;
   }
-  .seqhero-text.active .hero-row h1{opacity:1;transform:translateY(0);}
   .hero-row h1 em{font-style:italic;color:#e7d9b8;font-weight:320;}
   .hero-meta{
     max-width:250px;font-size:13.5px;color:rgba(255,255,255,.75);text-align:right;
     padding-top:16px;border-top:1px solid rgba(231,217,184,.55);
-    opacity:0;transform:translateY(20px);transition:opacity .8s ease .38s,transform .8s ease .38s;
+    opacity:0;animation:heroUp .9s cubic-bezier(.16,.84,.44,1) .5s forwards;
   }
-  .seqhero-text.active .hero-meta{opacity:1;transform:translateY(0);}
   .hero-meta .n{font-family:'Fraunces',serif;font-style:italic;font-size:16px;color:#e7d9b8;display:block;margin-bottom:8px;font-weight:400;}
-  .seqhero-progress{position:absolute;top:100px;left:28px;right:28px;z-index:3;height:2px;background:rgba(255,255,255,.22);}
-  .seqhero-progress-fill{height:100%;width:0%;background:#e7d9b8;}
+  @keyframes heroUp{from{opacity:0;transform:translateY(22px);}to{opacity:1;transform:translateY(0);}}
   .scroll-cue{
     position:absolute;left:28px;bottom:28px;z-index:3;display:flex;align-items:center;gap:12px;color:rgba(255,255,255,.7);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+    opacity:0;animation:heroUp .9s cubic-bezier(.16,.84,.44,1) .7s forwards;
   }
   .scroll-cue::after{content:"";width:1px;height:38px;background:rgba(255,255,255,.5);}
-  @media(max-width:700px){.seqhero{height:360vh;}}
 
   /* subtle swiss grid texture, used behind sparse editorial moments */
   .grid-overlay{
@@ -155,15 +145,16 @@
     opacity:.7;
   }
 
-  /* STATEMENT — pinned, scrubs horizontally with scroll */
-  .statement{position:relative;height:230vh;}
-  .statement-pin{position:sticky;top:0;height:100vh;display:flex;align-items:center;overflow:hidden;}
-  .statement-pin .container{max-width:none;position:relative;height:100%;display:flex;align-items:center;}
+  /* STATEMENT — pull-quote estatico, com textura de grid e aspas decorativas */
+  .statement{position:relative;padding:150px 0;overflow:hidden;}
+  .statement .container{position:relative;}
+  .statement .kicker{margin-bottom:28px;}
   .statement p{
     font-family:'Fraunces',serif;font-size:clamp(28px,5.4vw,58px);font-weight:400;line-height:1.32;color:var(--verde);
-    max-width:1000px;will-change:transform,filter,opacity;
+    max-width:1000px;
   }
   .statement p em{font-style:italic;color:var(--terra);}
+  @media(max-width:700px){.statement{padding:100px 0;}}
 
   /* TRAJETORIA / split sections */
   .split{display:grid;grid-template-columns:.9fr 1.1fr;gap:8vw;align-items:center;}
@@ -191,6 +182,8 @@
   .stat-row{display:flex;justify-content:space-between;align-items:baseline;gap:24px;padding:24px 0;border-bottom:1px solid var(--linha);}
   .stat-row .n{font-family:'Fraunces',serif;font-size:32px;color:var(--verde);font-weight:400;white-space:nowrap;}
   .stat-row .l{font-size:12.5px;letter-spacing:.02em;color:var(--ink-soft);text-align:right;max-width:280px;line-height:1.5;}
+  .numeros-sub{margin-top:64px;padding-top:44px;border-top:1px solid var(--linha-forte);}
+  .numeros-sub .kicker{display:block;margin-bottom:8px;}
   @media(max-width:900px){
     .numeros-split{grid-template-columns:1fr;}
     .numeros-media{position:relative;height:52vw;min-height:280px;}
@@ -229,28 +222,38 @@
   .jornada-pin{position:sticky;top:0;height:100vh;overflow:hidden;}
   .jornada-layer{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.1s ease;}
   .jornada-layer.active{opacity:1;}
-  .jornada-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(6,10,6,.22) 0%,rgba(6,10,6,.28) 55%,rgba(6,10,6,.72) 100%);}
-  .jornada-content{position:absolute;inset:0;z-index:2;}
-  .jornada-content .container{position:relative;height:100%;}
-  .jornada-text,.jornada-big{position:absolute;left:0;right:0;bottom:100px;opacity:0;transform:translateY(20px);transition:opacity .8s ease,transform .8s ease;}
-  .jornada-text.active,.jornada-big.active{opacity:1;transform:translateY(0);}
-  .jornada-text .kicker{color:#d9c78f;margin-bottom:24px;}
-  .jornada-line{font-family:'Fraunces',serif;font-style:italic;font-weight:400;color:#fff;font-size:clamp(24px,4vw,46px);max-width:820px;line-height:1.32;}
-  .jornada-line.close{font-style:normal;font-size:clamp(28px,4.6vw,54px);}
-  .jornada-big .n{font-family:'Fraunces',serif;font-size:clamp(68px,10.4vw,158px);color:#fff;line-height:.92;font-weight:400;}
-  .jornada-big .l{margin-top:16px;font-size:14.5px;letter-spacing:.03em;color:rgba(255,255,255,.78);max-width:320px;}
+  .jornada-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(6,10,6,.16) 0%,rgba(6,10,6,.24) 38%,rgba(6,10,6,.62) 68%,rgba(6,10,6,.92) 100%);}
+  .jornada-content{position:absolute;inset:0;z-index:2;display:flex;align-items:flex-end;padding-bottom:96px;}
+  .jornada-content .container{width:100%;}
+  .jornada-manifesto{max-width:920px;}
+  .jornada-manifesto .kicker{color:#d9c78f;margin-bottom:24px;display:flex;}
+  .jornada-manifesto .kicker::before{background:#d9c78f;}
+  .jm-lead{
+    font-family:'Fraunces',serif;font-style:italic;font-weight:400;
+    font-size:clamp(22px,2.7vw,33px);line-height:1.44;color:#fff;
+    max-width:800px;margin-bottom:32px;padding-bottom:32px;
+    border-bottom:1px solid rgba(231,217,184,.28);
+  }
+  .jm-body{columns:2 260px;column-gap:52px;}
+  .jm-body p{font-size:15px;line-height:1.8;color:rgba(255,255,255,.82);text-align:left;margin-bottom:18px;break-inside:avoid;}
   .jornada-progress{position:absolute;top:36px;left:28px;z-index:3;display:flex;gap:7px;}
   .jornada-progress span{width:24px;height:2px;background:rgba(255,255,255,.28);transition:background .3s ease;display:block;}
   .jornada-progress span.active{background:#e7d9b8;}
+  @media(max-width:900px){
+    .jm-body{columns:1;}
+  }
   @media(max-width:700px){
     .jornada{height:560vh;}
-    .jornada-text,.jornada-big{bottom:70px;}
+    .jornada-content{padding-bottom:56px;align-items:center;}
+    .jornada-manifesto{max-height:80vh;overflow-y:auto;padding-right:4px;}
+    .jm-lead{margin-bottom:24px;padding-bottom:24px;}
   }
 
   /* PILARES */
   .pilares-grid{display:grid;grid-template-columns:repeat(3,1fr);margin-top:64px;}
-  .pilar{padding:0 40px 0 0;border-left:1px solid var(--linha);padding-left:40px;}
-  .pilar:first-child{border-left:none;padding-left:0;}
+  .pilar{padding:0 40px 32px 0;border-left:1px solid var(--linha);padding-left:40px;}
+  .pilar:nth-child(3n+1){border-left:none;padding-left:0;}
+  .pilar:nth-child(n+4){border-top:1px solid var(--linha);padding-top:32px;}
   .pilar .num{font-family:'Fraunces',serif;font-size:14px;color:var(--terra);margin-bottom:18px;}
   .pilar h3{font-size:19px;color:var(--verde);font-weight:500;margin-bottom:12px;}
   .pilar p{font-size:14.5px;color:var(--ink-soft);}
@@ -262,10 +265,8 @@
 
   /* PARCERIA */
   .parceria{background:var(--creme-2);}
-  .tabs{display:flex;gap:8px;margin-top:40px;}
-  .tab-btn{padding:12px 22px;background:transparent;border:1px solid var(--linha-forte);font-weight:600;font-size:13.5px;color:var(--ink-soft);cursor:pointer;}
-  .tab-btn.active{background:var(--verde);color:#fff;border-color:var(--verde);}
   .table-wrap{overflow-x:auto;margin-top:28px;}
+  .parceria-cta{margin-top:40px;}
   table{width:100%;border-collapse:collapse;min-width:640px;}
   thead th{text-align:left;padding:16px 20px;border-bottom:1.5px solid var(--verde);font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:600;color:var(--verde);}
   tbody td{padding:16px 20px;border-bottom:1px solid var(--linha);font-size:14.5px;color:var(--ink);vertical-align:top;}
@@ -333,11 +334,11 @@
     </a>
     <nav>
       <ul>
-        <li><a href="#trajetoria">Trajetória</a></li>
-        <li><a href="#operacao">Operação</a></li>
-        <li><a href="#parceria">Parceria</a></li>
-        <li><a href="#galeria">Galeria</a></li>
-        <li><a href="#contato">Contato</a></li>
+        <li><a href="#trajetoria" data-i18n="nav.trajetoria">Trajetória</a></li>
+        <li><a href="#operacao" data-i18n="nav.operacao">Operação</a></li>
+        <li><a href="#parceria" data-i18n="nav.parceria">Parceria</a></li>
+        <li><a href="#galeria" data-i18n="nav.galeria">Galeria</a></li>
+        <li><a href="#contato" data-i18n="nav.contato">Contato</a></li>
       </ul>
     </nav>
     <div class="head-actions">
@@ -346,58 +347,54 @@
         <button type="button" data-lang="en" title="English" aria-label="English">🇺🇸</button>
         <button type="button" data-lang="es" title="Español" aria-label="Español">🇪🇸</button>
       </div>
-      <a href="https://wa.me/5511981843030" target="_blank" class="btn btn-line">Falar com a equipe</a>
+      <a href="https://wa.me/5567998965666" target="_blank" class="btn btn-line" data-i18n="header.cta">Falar com a equipe</a>
       <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
     </div>
   </div>
 </header>
 
-<div id="langNote"></div>
-
 <div class="mobile-nav" id="mobileNav">
   <button class="close" id="menuClose">&times;</button>
-  <a href="#trajetoria">Trajetória</a>
-  <a href="#operacao">Operação</a>
-  <a href="#parceria">Parceria</a>
-  <a href="#galeria">Galeria</a>
-  <a href="#contato">Contato</a>
+  <a href="#trajetoria" data-i18n="nav.trajetoria">Trajetória</a>
+  <a href="#operacao" data-i18n="nav.operacao">Operação</a>
+  <a href="#parceria" data-i18n="nav.parceria">Parceria</a>
+  <a href="#galeria" data-i18n="nav.galeria">Galeria</a>
+  <a href="#contato" data-i18n="nav.contato">Contato</a>
   <div class="lang-switch" style="margin-top:22px;" aria-label="Selecionar idioma">
     <button type="button" class="active" data-lang="pt" title="Português" aria-label="Português">🇧🇷</button>
     <button type="button" data-lang="en" title="English" aria-label="English">🇺🇸</button>
     <button type="button" data-lang="es" title="Español" aria-label="Español">🇪🇸</button>
   </div>
-  <a href="https://wa.me/5511981843030" target="_blank" class="btn btn-solid" style="margin-top:10px;">Falar no WhatsApp</a>
+  <a href="https://wa.me/5567998965666" target="_blank" class="btn btn-solid" style="margin-top:10px;" data-i18n="header.ctaWhats">Falar no WhatsApp</a>
 </div>
 
-<section class="seqhero" id="home">
-  <div class="seqhero-pin">
-    <canvas id="seqheroCanvas"></canvas>
-    <div class="seqhero-scrim"></div>
-    <div class="seqhero-progress"><div class="seqhero-progress-fill" id="seqheroFill"></div></div>
-    <div class="seqhero-content">
-      <div class="container">
-        <div class="seqhero-text" id="seqheroText">
-          <div class="hero-eyebrow">Desde 1950 · Fazenda Cerejo, Angélica/MS · Fazenda Santana, Paraguai</div>
-          <div class="hero-row">
-            <h1>Sete décadas de evolução na <em>pecuária de corte</em></h1>
-            <div class="hero-meta">
-              <span class="n">Pioneirismo, tradição e tecnologia</span>
-              unidos para resultados concretos no campo.
-            </div>
-          </div>
+<section class="hero-slider" id="home">
+  <div class="hs-slide active" style="background-image:url('images/manifesto-poster.jpg')"></div>
+  <div class="hs-slide" style="background-image:url('images/jornada-confinamento.jpg')"></div>
+  <div class="hs-slide" style="background-image:url('images/jornada-lavoura.jpg')"></div>
+  <div class="hs-slide" style="background-image:url('images/gallery/g22.jpg')"></div>
+  <div class="hs-scrim"></div>
+  <div class="hs-dots" id="hsDots"></div>
+  <div class="hero-content">
+    <div class="container">
+      <div class="hero-eyebrow" data-i18n="hero.eyebrow">Desde 1950 · Fazenda Cerejo, Angélica/MS · Fazenda Santana, Paraguai</div>
+      <div class="hero-row">
+        <h1 data-i18n="hero.h1">Seis décadas de evolução na <em>pecuária de corte</em></h1>
+        <div class="hero-meta" data-i18n="hero.meta">
+          <span class="n">Pioneirismo, tradição e tecnologia</span>
+          unidos para resultados concretos no campo.
         </div>
       </div>
     </div>
-    <div class="scroll-cue">Role para conhecer</div>
   </div>
+  <div class="scroll-cue" data-i18n="hero.scrollCue">Role para conhecer</div>
 </section>
 
 <section class="statement" id="statementSection">
-  <div class="statement-pin">
-    <div class="grid-overlay"></div>
-    <div class="container">
-      <p id="statementText">A base da GN foi consolidada na década de 60, quando piquetes de menor escala romperam com o manejo convencional da época. Hoje, a atividade agrícola de alta precisão e a engorda intensiva operam em <em>total sinergia</em>.</p>
-    </div>
+  <div class="grid-overlay"></div>
+  <div class="container reveal">
+    <span class="kicker" data-i18n="statement.kicker">Nossa base</span>
+    <p data-i18n="statement.text">A base da GN foi consolidada na década de 60, quando piquetes de menor escala romperam com o manejo convencional da época. Hoje, a atividade agrícola de alta precisão e a engorda intensiva operam em <em>total sinergia</em>.</p>
   </div>
 </section>
 
@@ -405,14 +402,14 @@
   <div class="container">
     <div class="split reveal">
       <div class="split-media">
-        <div class="ph" data-img="images/trajetoria.jpg"><img src="images/trajetoria.jpg" alt="Vaqueiros a cavalo, GN Agropecuária"></div>
-        <div class="caption">Manejo a cavalo na Fazenda Cerejo, ao amanhecer.</div>
+        <div class="ph" data-img="images/trajetoria.jpg"><img src="images/trajetoria.jpg" alt="Vaqueiros a cavalo, GN Agropecuária" data-i18n-alt="trajetoria.imgAlt"></div>
+        <div class="caption" data-i18n="trajetoria.caption">Manejo a cavalo na Fazenda Cerejo, ao amanhecer.</div>
       </div>
       <div class="split-text">
-        <span class="kicker">Nossa trajetória</span>
-        <h2>Raízes na década de 60, olhos voltados ao <em>futuro do campo</em></h2>
-        <p>O que nasceu no ecossistema frigorífico em 1950 expandiu-se para um modelo produtivo verticalizado. Cruzamos gerações refinando processos, com os pés fincados na experiência e os olhos voltados à eficiência operacional e sustentabilidade no campo.</p>
-        <p>Duas unidades produtoras sustentam a operação hoje: a Fazenda Cerejo, em Angélica/MS, e a Fazenda Santana, no Paraguai, unindo manejo tradicional e automação de ponta.</p>
+        <span class="kicker" data-i18n="trajetoria.kicker">Nossa trajetória</span>
+        <h2 data-i18n="trajetoria.h2">Raízes na década de 60, olhos voltados ao <em>futuro do campo</em></h2>
+        <p data-i18n="trajetoria.p1">O que nasceu no ecossistema frigorífico em 1950 evoluiu para uma operação produtiva integrada. Cruzamos gerações refinando processos, com os pés fincados na experiência e os olhos voltados à eficiência operacional e à sustentabilidade no campo.</p>
+        <p data-i18n="trajetoria.p2">Hoje, duas unidades produtoras sustentam essa operação: a Fazenda Cerejo, em Angélica/MS, e a Fazenda Santana, no Paraguai, unindo manejo tradicional, tecnologia e automação de ponta.</p>
       </div>
     </div>
   </div>
@@ -427,21 +424,29 @@
     </div>
     <div class="numeros-content">
       <div class="reveal">
-        <span class="kicker">Nossos números</span>
-        <h2>Escala e precisão <em>em cada hectare</em></h2>
+        <span class="kicker" data-i18n="numeros.kicker">Nossos números</span>
+        <h2 data-i18n="numeros.h2">Escala e precisão <em>em cada hectare</em></h2>
       </div>
       <div class="reveal" style="margin-top:56px;">
         <div class="stat-hero">
-          <div class="n">70</div>
-          <div class="l">anos de atuação sólida na cadeia pecuária nacional, da Fazenda Cerejo ao mercado exigente de exportação.</div>
+          <div class="n">62</div>
+          <div class="l" data-i18n="numeros.stat0">anos de atuação sólida na cadeia pecuária nacional, da Fazenda Cerejo ao mercado exigente de exportação.</div>
         </div>
-        <div class="stat-row"><div class="n">2</div><div class="l">unidades produtoras: Fazenda Cerejo (MS) e Fazenda Santana (Paraguai)</div></div>
-        <div class="stat-row"><div class="n">6.680 ha</div><div class="l">sob gestão agrícola de alta precisão técnica</div></div>
-        <div class="stat-row"><div class="n">7.200</div><div class="l">animais em capacidade estática do boitel</div></div>
-        <div class="stat-row"><div class="n">100%</div><div class="l">dos currais de confinamento com automação integral</div></div>
-        <div class="stat-row"><div class="n">440 ha</div><div class="l">operando com irrigação via pivô central</div></div>
-        <div class="stat-row"><div class="n">100 mil</div><div class="l">sacas de capacidade própria de armazenagem de grãos</div></div>
-        <div class="stat-row"><div class="n">92</div><div class="l">profissionais conduzindo com rigor a operação de campo</div></div>
+        <div class="stat-row"><div class="n">2</div><div class="l" data-i18n="numeros.stat1">unidades produtoras: Fazenda Cerejo (MS) e Fazenda Santana (Paraguai)</div></div>
+        <div class="stat-row"><div class="n">6.680 ha</div><div class="l" data-i18n="numeros.stat2">sob gestão agrícola de alta precisão técnica</div></div>
+        <div class="stat-row"><div class="n">7.200</div><div class="l" data-i18n="numeros.stat3">animais em capacidade estática do boitel</div></div>
+        <div class="stat-row"><div class="n">100%</div><div class="l" data-i18n="numeros.stat4">dos currais de confinamento com automação integral</div></div>
+        <div class="stat-row"><div class="n">440 ha</div><div class="l" data-i18n="numeros.stat5">operando com irrigação via pivô central</div></div>
+        <div class="stat-row"><div class="n">100 mil</div><div class="l" data-i18n="numeros.stat6">sacas de capacidade própria de armazenagem de grãos</div></div>
+        <div class="stat-row"><div class="n">92</div><div class="l" data-i18n="numeros.stat7">profissionais conduzindo com rigor a operação de campo</div></div>
+      </div>
+      <div class="reveal numeros-sub">
+        <span class="kicker" data-i18n="numeros.paraguaiKicker">Fazenda Santana · Paraguai</span>
+        <div class="stat-row"><div class="n">7.800 ha</div><div class="l" data-i18n="numeros.pystat0">área total da unidade paraguaia do grupo</div></div>
+        <div class="stat-row"><div class="n">2.200 ha</div><div class="l" data-i18n="numeros.pystat1">destinados à agricultura de precisão</div></div>
+        <div class="stat-row"><div class="n">3.909 ha</div><div class="l" data-i18n="numeros.pystat2">destinados à pecuária, com recria e terminação intensiva a pasto (TIP)</div></div>
+        <div class="stat-row"><div class="n">8 mil</div><div class="l" data-i18n="numeros.pystat3">animais em rebanho total, sendo 2 mil em capacidade estática na TIP</div></div>
+        <div class="stat-row"><div class="n">5 mil</div><div class="l" data-i18n="numeros.pystat4">cabeças abatidas por ano</div></div>
       </div>
     </div>
   </div>
@@ -450,28 +455,28 @@
 <section id="operacao">
   <div class="container">
     <div class="op-head reveal">
-      <span class="kicker">Nossa operação</span>
-      <h2>Três frentes, <em>uma só engrenagem</em></h2>
-      <p class="lede">Boitel, agricultura e tecnologia operando em sinergia para blindar a rentabilidade do produtor parceiro.</p>
+      <span class="kicker" data-i18n="operacao.kicker">Nossa operação</span>
+      <h2 data-i18n="operacao.h2">Três frentes, <em>uma só engrenagem</em></h2>
+      <p class="lede" data-i18n="operacao.lede">Boitel, agricultura e tecnologia operando em sinergia para blindar a rentabilidade do produtor parceiro.</p>
     </div>
     <div class="op-grid">
       <div class="op-card reveal">
-        <div class="ph"><img src="images/boitel-pessoa.jpg" alt="Controle de qualidade do alimento no boitel GN"></div>
-        <div class="idx">01 · Boitel</div>
-        <h3>Terminação de alta eficiência</h3>
-        <p>Dietas rigorosamente balanceadas e infraestrutura automatizada entregam carcaças padronizadas, otimizando o fluxo de caixa do parceiro e garantindo as melhores bonificações em escala industrial.</p>
+        <div class="ph"><img src="images/boitel-pessoa.jpg" alt="Controle de qualidade do alimento no boitel GN" data-i18n-alt="operacao.card1.imgAlt"></div>
+        <div class="idx" data-i18n="operacao.card1.idx">01 · Boitel</div>
+        <h3 data-i18n="operacao.card1.h3">Terminação de alta eficiência</h3>
+        <p data-i18n="operacao.card1.p">Dietas rigorosamente balanceadas e infraestrutura automatizada entregam carcaças padronizadas, otimizando o fluxo de caixa do parceiro e garantindo as melhores bonificações em escala industrial.</p>
       </div>
       <div class="op-card reveal">
-        <div class="ph"><img src="images/agricultura.jpg" alt="Pivô central, agricultura de precisão GN"></div>
-        <div class="idx">02 · Agricultura</div>
-        <h3>Estratégia integrada no campo</h3>
-        <p>Lavouras de cana-de-açúcar e grãos conduzidas com telemetria embarcada e tratores com GPS, abastecendo com controle total a demanda nutricional do confinamento.</p>
+        <div class="ph"><img src="images/agricultura.jpg" alt="Pivô central, agricultura de precisão GN" data-i18n-alt="operacao.card2.imgAlt"></div>
+        <div class="idx" data-i18n="operacao.card2.idx">02 · Agricultura</div>
+        <h3 data-i18n="operacao.card2.h3">Estratégia integrada no campo</h3>
+        <p data-i18n="operacao.card2.p">Lavouras de cana-de-açúcar e grãos conduzidas com telemetria embarcada e tratores com GPS, abastecendo com controle total a demanda nutricional do confinamento.</p>
       </div>
       <div class="op-card reveal">
-        <div class="ph"><img src="images/gestao.jpg" alt="Rastreabilidade e dados, gestão GN"></div>
-        <div class="idx">03 · Gestão &amp; Tecnologia</div>
-        <h3>Processos orientados por dados</h3>
-        <p>Softwares de monitoramento de pasto, automação de cocho e ERP de custos. Cada decisão é respaldada por métricas reais, maximizando o ganho médio diário.</p>
+        <div class="ph"><img src="images/gestao.jpg" alt="Rastreabilidade e dados, gestão GN" data-i18n-alt="operacao.card3.imgAlt"></div>
+        <div class="idx" data-i18n="operacao.card3.idx">03 · Gestão &amp; Tecnologia</div>
+        <h3 data-i18n="operacao.card3.h3">Processos orientados por dados</h3>
+        <p data-i18n="operacao.card3.p">Softwares de monitoramento de pasto, automação de cocho e ERP de custos. Cada decisão é respaldada por métricas reais, maximizando o ganho médio diário.</p>
       </div>
     </div>
   </div>
@@ -480,11 +485,11 @@
 <section class="cine">
   <div class="container">
     <div class="reveal">
-      <span class="kicker" style="color:#d9c78f;">Em movimento</span>
-      <h2 style="color:#fff;">Um pouco da <em>Fazenda Cerejo</em></h2>
+      <span class="kicker" style="color:#d9c78f;" data-i18n="cine.kicker">Em movimento</span>
+      <h2 style="color:#fff;" data-i18n="cine.h2">Um pouco da <em>Fazenda Cerejo</em></h2>
     </div>
     <div class="cine-frame reveal" id="cineFrame">
-      <img class="poster" src="images/manifesto-poster.jpg" alt="Vaqueiros ao pôr do sol, GN Agropecuária">
+      <img class="poster" src="images/manifesto-poster.jpg" alt="Vaqueiros ao pôr do sol, GN Agropecuária" data-i18n-alt="cine.imgAlt">
       <div class="scrim2" id="playOverlay">
         <div class="play-btn"><svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
       </div>
@@ -493,8 +498,8 @@
       </video>
     </div>
     <div class="cine-caption reveal">
-      <p>Cenas do dia a dia na Fazenda Cerejo, do amanhecer no curral ao pôr do sol no pasto.</p>
-      <span class="src">Showreel · Fazenda Cerejo, 2026</span>
+      <p data-i18n="cine.caption">Cenas do dia a dia na Fazenda Cerejo, do amanhecer no curral ao pôr do sol no pasto.</p>
+      <span class="src" data-i18n="cine.src">Showreel · Fazenda Cerejo, 2026</span>
     </div>
   </div>
 </section>
@@ -512,27 +517,17 @@
     <div class="jornada-progress" id="jornadaProgress"></div>
     <div class="jornada-content">
       <div class="container">
-        <div class="jornada-text active" data-stage="0">
-          <span class="kicker">Manifesto</span>
-          <p class="jornada-line">Há mais de meio século, aprendemos que a pecuária de resultados não se sustenta com soluções superficiais. Ela exige consistência, profundidade técnica e o respeito ao tempo que cada processo demanda.</p>
-        </div>
-        <div class="jornada-text" data-stage="1">
-          <p class="jornada-line">Nascemos dentro da cadeia produtiva da carne, entendemos a engrenagem que a move e traduzimos essa bagagem em terra trabalhada e eficiência de cocho.</p>
-        </div>
-        <div class="jornada-text" data-stage="2">
-          <p class="jornada-line">Não seguimos o mercado de forma passiva; preferimos ditar o ritmo combinando o conhecimento acumulado no pasto e a precisão dos dados automatizados.</p>
-        </div>
-        <div class="jornada-text" data-stage="3">
-          <p class="jornada-line">Nosso boitel não é apenas um espaço de engorda, mas o ponto de convergência onde a agricultura inteligente e o manejo zootécnico se encontram para blindar a rentabilidade do produtor.</p>
-        </div>
-        <div class="jornada-text" data-stage="4">
-          <p class="jornada-line">Buscamos o sentido em cada hectare cultivado e o propósito em cada lote embarcado.</p>
-        </div>
-        <div class="jornada-text" data-stage="5">
-          <p class="jornada-line">Conectamos saberes, otimizamos recursos e mantemos compromisso firme com a verdade da terra.</p>
-        </div>
-        <div class="jornada-text" data-stage="6">
-          <p class="jornada-line close">Avançamos com consciência para entregar valor real a quem planta o presente e alimenta o amanhã.</p>
+        <div class="jornada-manifesto reveal">
+          <span class="kicker" data-i18n="jornada.kicker">Manifesto</span>
+          <p class="jm-lead" data-i18n="jornada.p1">Há mais de meio século, aprendemos que a pecuária de resultados não se sustenta com soluções superficiais. Ela exige consistência, profundidade técnica e o respeito ao tempo que cada processo demanda.</p>
+          <div class="jm-body">
+            <p data-i18n="jornada.p2">Nascemos dentro da cadeia produtiva da carne, entendemos a engrenagem que a move e traduzimos essa bagagem em terra trabalhada e eficiência de cocho.</p>
+            <p data-i18n="jornada.p3">Não seguimos o mercado de forma passiva; preferimos ditar o ritmo combinando o conhecimento acumulado no pasto e a precisão dos dados automatizados.</p>
+            <p data-i18n="jornada.p4">Nosso boitel não é apenas um espaço de engorda, mas o ponto de convergência onde a agricultura inteligente e o manejo zootécnico se encontram para blindar a rentabilidade do produtor.</p>
+            <p data-i18n="jornada.p5">Buscamos o sentido em cada hectare cultivado e o propósito em cada lote embarcado.</p>
+            <p data-i18n="jornada.p6">Conectamos saberes, otimizamos recursos e mantemos compromisso firme com a verdade da terra.</p>
+            <p data-i18n="jornada.p7">Avançamos com consciência para entregar valor real a quem planta o presente e alimenta o amanhã.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -542,24 +537,45 @@
 <section>
   <div class="container">
     <div class="reveal">
-      <span class="kicker">Por que confinar com a GN</span>
-      <h2>Três pilares que <em>blindam sua rentabilidade</em></h2>
+      <span class="kicker" data-i18n="pilares.kicker">Por que confinar com a GN</span>
+      <h2 data-i18n="pilares.h2">Decisões com mais <em>segurança</em> e eficiência</h2>
+      <p class="lede" data-i18n="pilares.lede">Estrutura, tecnologia e modelos de parceria para ajudar o produtor a tomar decisões com mais segurança e eficiência.</p>
     </div>
     <div class="pilares-grid">
       <div class="pilar reveal">
         <div class="num">01</div>
-        <h3>Segurança e credibilidade</h3>
-        <p>Mais de meio século de compromisso rigoroso com a verdade da terra e a entrega de resultados.</p>
+        <h3 data-i18n="pilares.p1.h3">Melhores oportunidades de negociação</h3>
+        <p data-i18n="pilares.p1.p">Diferentes estratégias comerciais e condições alinhadas ao momento e ao perfil de cada operação.</p>
       </div>
       <div class="pilar reveal">
         <div class="num">02</div>
-        <h3>Melhores negociações</h3>
-        <p>Estreito relacionamento com plantas frigoríficas parceiras, viabilizando mercados exigentes e bonificações de escala.</p>
+        <h3 data-i18n="pilares.p2.h3">Maior previsibilidade na terminação</h3>
+        <p data-i18n="pilares.p2.p">Acompanhamento técnico, manejo padronizado e monitoramento contínuo durante a permanência do lote.</p>
       </div>
       <div class="pilar reveal">
         <div class="num">03</div>
-        <h3>Rentabilidade maximizada</h3>
-        <p>Nutrição de precisão e controle de ambiente que reduzem o custo por arroba e encurtam o ciclo pecuário.</p>
+        <h3 data-i18n="pilares.p3.h3">Melhor gestão do fluxo de caixa</h3>
+        <p data-i18n="pilares.p3.p">Maior organização financeira e previsibilidade para o planejamento da produção.</p>
+      </div>
+      <div class="pilar reveal">
+        <div class="num">04</div>
+        <h3 data-i18n="pilares.p4.h3">Aproveitamento das áreas da fazenda</h3>
+        <p data-i18n="pilares.p4.p">Mais flexibilidade para organizar o uso das áreas de pastagem.</p>
+      </div>
+      <div class="pilar reveal">
+        <div class="num">05</div>
+        <h3 data-i18n="pilares.p5.h3">Sanidade e bem-estar animal</h3>
+        <p data-i18n="pilares.p5.p">Garantia de manejo adequado, acompanhamento e condições para o desenvolvimento do lote.</p>
+      </div>
+      <div class="pilar reveal">
+        <div class="num">06</div>
+        <h3 data-i18n="pilares.p6.h3">Estrutura e tecnologia à disposição</h3>
+        <p data-i18n="pilares.p6.p">Infraestrutura adequada, processos padronizados e tecnologia para acompanhar a operação com controle total.</p>
+      </div>
+      <div class="pilar reveal">
+        <div class="num">07</div>
+        <h3 data-i18n="pilares.p7.h3">Transparência na operação</h3>
+        <p data-i18n="pilares.p7.p">Clareza nas informações, nas condições e na relação comercial.</p>
       </div>
     </div>
   </div>
@@ -568,32 +584,29 @@
 <section class="parceria" id="parceria">
   <div class="container">
     <div class="reveal">
-      <span class="kicker">Condições de parceria</span>
-      <h2>Modelos claros e <em>transparentes</em></h2>
-      <p class="lede">Estruturados para atender de forma justa à realidade de cada produtor parceiro.</p>
-    </div>
-    <div class="tabs reveal">
-      <button class="tab-btn active" data-col="0">Modalidade KG/MS</button>
-      <button class="tab-btn" data-col="1">Parceria Padrão</button>
+      <span class="kicker" data-i18n="parceria.kicker">Condições de parceria</span>
+      <h2 data-i18n="parceria.h2">Modelos claros e <em>transparentes</em></h2>
+      <p class="lede" data-i18n="parceria.lede">Trabalhamos com modelos comerciais que podem ser ajustados de acordo com o perfil, a estratégia e as necessidades de cada produtor parceiro.</p>
     </div>
     <div class="table-wrap reveal">
       <table id="parceriaTable">
         <thead>
-          <tr><th>Condição / Detalhe</th><th>Modalidade KG/MS</th><th>Parceria Padrão</th></tr>
+          <tr><th data-i18n="parceria.th0">Condição / Detalhe</th><th data-i18n="parceria.th1">Modalidade KG/MS</th><th data-i18n="parceria.th2">Parceria Padrão</th></tr>
         </thead>
         <tbody>
-          <tr><td>Lote Mínimo</td><td>100 animais</td><td>60 animais</td></tr>
-          <tr><td>Noventena</td><td>Animais em noventena não serão aceitos</td><td>Animais em noventena não serão aceitos</td></tr>
-          <tr><td>Vistoria</td><td>Conforme avaliação técnica padrão</td><td>Realizada pela equipe da Fazenda Cerejo</td></tr>
-          <tr><td>Frete</td><td>Descontado após o abate (sem desembolso do parceiro)</td><td>Por conta do confinamento</td></tr>
-          <tr><td>Pesagem</td><td>Balança rodoviária do confinamento</td><td>Na balança do parceiro (até 150 km) ou na balança do boitel (acima de 150 km)</td></tr>
-          <tr><td>Tempo de Permanência</td><td>Mínimo 95 dias / Máximo 120 dias</td><td>Mínimo 95 dias / Máximo 120 dias</td></tr>
-          <tr><td>Protocolo Sanitário</td><td>R$ 25,00 por animal (descontado após o abate)</td><td>Por conta do confinamento</td></tr>
-          <tr><td>Responsabilidade por Mortes</td><td>Mortes sob gestão do confinamento pagas com base no peso médio de entrada e 50% de rendimento de carcaça. Sem cobertura para mortes naturais.</td><td>Conforme termos do contrato padrão de parceria agropecuária GN</td></tr>
-          <tr><td>Abate e Canal de Venda</td><td>Plantas frigoríficas parceiras do confinamento</td><td>Plantas frigoríficas parceiras do confinamento</td></tr>
-          <tr><td>Prazo de Pagamento</td><td>30 dias após o abate</td><td>30 dias após o abate</td></tr>
+          <tr><td data-i18n="parceria.r0.0">Lote Mínimo</td><td data-i18n="parceria.r0.1">100 animais</td><td data-i18n="parceria.r0.2">60 animais</td></tr>
+          <tr><td data-i18n="parceria.r1.0">Noventena</td><td data-i18n="parceria.r1.1">Animais em noventena não serão aceitos</td><td data-i18n="parceria.r1.2">Animais em noventena não serão aceitos</td></tr>
+          <tr><td data-i18n="parceria.r2.0">Vistoria</td><td data-i18n="parceria.r2.1">Conforme avaliação técnica padrão</td><td data-i18n="parceria.r2.2">Realizada pela equipe da Fazenda Cerejo</td></tr>
+          <tr><td data-i18n="parceria.r3.0">Frete</td><td data-i18n="parceria.r3.1">Descontado após o abate (sem desembolso do parceiro)</td><td data-i18n="parceria.r3.2">Por conta do confinamento</td></tr>
+          <tr><td data-i18n="parceria.r4.0">Tempo de Permanência</td><td data-i18n="parceria.r4.1">Mínimo 90 dias / Máximo 120 dias</td><td data-i18n="parceria.r4.2">Mínimo 90 dias / Máximo 120 dias</td></tr>
+          <tr><td data-i18n="parceria.r5.0">Protocolo Sanitário</td><td data-i18n="parceria.r5.1">R$ 25,00 por animal (descontado após o abate)</td><td data-i18n="parceria.r5.2">Por conta do confinamento</td></tr>
+          <tr><td data-i18n="parceria.r6.0">Responsabilidade por Mortes</td><td data-i18n="parceria.r6.1">Mortes sob gestão do confinamento pagas com base no peso médio de entrada e 50% de rendimento de carcaça. Sem cobertura para mortes naturais.</td><td data-i18n="parceria.r6.2">Conforme termos do contrato padrão de parceria agropecuária GN</td></tr>
+          <tr><td data-i18n="parceria.r7.0">Abate e Canal de Venda</td><td data-i18n="parceria.r7.1">Plantas frigoríficas parceiras do confinamento</td><td data-i18n="parceria.r7.2">Plantas frigoríficas parceiras do confinamento</td></tr>
         </tbody>
       </table>
+    </div>
+    <div class="reveal parceria-cta">
+      <a href="https://wa.me/5567998965666" target="_blank" class="btn btn-solid" data-i18n="parceria.cta">Quero saber mais</a>
     </div>
   </div>
 </section>
@@ -602,18 +615,18 @@
   <div class="container">
     <div class="split rev reveal">
       <div class="split-media">
-        <div class="ph"><img src="images/sustentabilidade.jpg" alt="Sede da Fazenda Cerejo às margens do rio"></div>
-        <div class="caption">A sede da Fazenda Cerejo, às margens do rio.</div>
+        <div class="ph"><img src="images/sustentabilidade.jpg" alt="Vista aérea da sede e do boitel da Fazenda Cerejo" data-i18n-alt="sustentabilidade.imgAlt"></div>
+        <div class="caption" data-i18n="sustentabilidade.caption">A sede e o boitel da Fazenda Cerejo, vistos do alto.</div>
       </div>
       <div class="split-text">
-        <span class="kicker">Sustentabilidade</span>
-        <h2>Economia circular <em>aplicada</em></h2>
-        <p>Os resíduos orgânicos gerados em nosso confinamento passam por compostagem no pátio técnico e retornam às lavouras de cana e grãos como fertilizante orgânico de alto valor biológico.</p>
-        <p>Esse ciclo fechado confere viabilidade econômica e atende com absoluto rigor técnico às exigências socioambientais.</p>
+        <span class="kicker" data-i18n="sustentabilidade.kicker">Sustentabilidade</span>
+        <h2 data-i18n="sustentabilidade.h2">Economia circular <em>aplicada</em></h2>
+        <p data-i18n="sustentabilidade.p1">Os resíduos orgânicos gerados no confinamento são direcionados à compostagem em estrutura própria, onde passam por um processo controlado de transformação. O composto resultante retorna às áreas agrícolas, contribuindo para a fertilidade do solo e para o aproveitamento eficiente dos nutrientes.</p>
+        <p data-i18n="sustentabilidade.p2">A integração entre pecuária e agricultura permite transformar um subproduto da operação em recurso para a produção, promovendo o aproveitamento de materiais, a eficiência dos processos e uma gestão mais responsável dos recursos naturais.</p>
         <div class="tags">
-          <span class="tag">Lista Trace</span>
-          <span class="tag">Cota Hilton · Exportação Europa</span>
-          <span class="tag">Compostagem própria</span>
+          <span class="tag" data-i18n="sustentabilidade.tag1">Compostagem própria</span>
+          <span class="tag" data-i18n="sustentabilidade.tag2">Aproveitamento de nutrientes</span>
+          <span class="tag" data-i18n="sustentabilidade.tag3">Integração entre pecuária e agricultura</span>
         </div>
       </div>
     </div>
@@ -624,10 +637,10 @@
   <div class="container">
     <div class="galeria-head reveal">
       <div>
-        <span class="kicker">Galeria</span>
-        <h2>A Fazenda Cerejo <em>em imagens</em></h2>
+        <span class="kicker" data-i18n="galeria.kicker">Galeria</span>
+        <h2 data-i18n="galeria.h2">A Fazenda Cerejo <em>em imagens</em></h2>
       </div>
-      <p class="lede" style="margin-top:0;">Still e aéreo do dia a dia da fazenda, do curral ao pasto.</p>
+      <p class="lede" style="margin-top:0;" data-i18n="galeria.lede">Still e aéreo do dia a dia da fazenda, do curral ao pasto.</p>
     </div>
     <div class="g-grid reveal" id="gGrid">
       <!-- itens gerados via lista abaixo -->
@@ -645,24 +658,24 @@
 <section id="contato">
   <div class="container">
     <div class="reveal">
-      <span class="kicker">Contato</span>
-      <h2>Leve o rigor técnico da nossa terminação para o seu rebanho</h2>
+      <span class="kicker" data-i18n="contato.kicker">Contato</span>
+      <h2 data-i18n="contato.h2">Encontre o modelo de parceria adequado para a sua operação</h2>
     </div>
     <div class="contato-grid reveal">
       <div class="contato-media">
-        <div class="ph"><img src="images/contato-novo.jpg" alt="Equipe GN Agropecuária"></div>
+        <div class="ph"><img src="images/contato-novo.jpg" alt="Equipe GN Agropecuária" data-i18n-alt="contato.imgAlt"></div>
       </div>
       <div class="contato-info">
-        <p class="lede" style="margin-top:0;">Fale com a nossa equipe e conheça as condições de parceria.</p>
+        <p class="lede" style="margin-top:0;" data-i18n="contato.lede">Converse com a equipe da GN e conheça as possibilidades de parceria para o seu rebanho.</p>
         <div class="contact-list">
-          <div class="contact-item"><div><strong>Telefone / WhatsApp</strong><a href="https://wa.me/5511981843030" target="_blank">(11) 9 8184-3030</a></div></div>
-          <div class="contact-item"><div><strong>E-mail</strong><a href="mailto:gabriel@gnagropecuaria.com.br">gabriel@gnagropecuaria.com.br</a></div></div>
-          <div class="contact-item"><div><strong>Instagram</strong><a href="https://www.instagram.com/gn.agropecuaria/" target="_blank">@gn.agropecuaria</a></div></div>
-          <div class="contact-item"><div><strong>Localização</strong><span>Fazenda Cerejo, Angélica/MS</span></div></div>
+          <div class="contact-item"><div><strong data-i18n="contato.label.tel">Telefone / WhatsApp</strong><a href="https://wa.me/5567998965666" target="_blank">(67) 9 9896-5666</a></div></div>
+          <div class="contact-item"><div><strong data-i18n="contato.label.email">E-mail</strong><a href="mailto:contato@gnagropecuaria.com.br">contato@gnagropecuaria.com.br</a></div></div>
+          <div class="contact-item"><div><strong data-i18n="contato.label.insta">Instagram</strong><a href="https://www.instagram.com/gn.agropecuaria/" target="_blank">@gn.agropecuaria</a></div></div>
+          <div class="contact-item"><div><strong data-i18n="contato.label.loc">Localização</strong><span>Fazenda Cerejo, Angélica/MS</span></div></div>
         </div>
         <div class="contato-actions">
-          <a href="https://wa.me/5511981843030" target="_blank" class="btn btn-solid">Falar no WhatsApp</a>
-          <a href="mailto:gabriel@gnagropecuaria.com.br" class="btn btn-line">Enviar e-mail</a>
+          <a href="https://wa.me/5567998965666" target="_blank" class="btn btn-solid" data-i18n="header.cta">Falar com a equipe</a>
+          <a href="mailto:contato@gnagropecuaria.com.br" class="btn btn-line" data-i18n="contato.btnEmail">Enviar e-mail</a>
         </div>
       </div>
     </div>
@@ -671,8 +684,8 @@
 
 <footer>
   <div class="container">
-    <span>© <span id="year"></span> GN Agropecuária. Todos os direitos reservados.</span>
-    <span>Fazenda Cerejo, Angélica/MS · Fazenda Santana, Paraguai</span>
+    <span>© <span id="year"></span> GN Agropecuária. <span data-i18n="footer.rights">Todos os direitos reservados.</span></span>
+    <span data-i18n="footer.locations">Fazenda Cerejo, Angélica/MS · Fazenda Santana, Paraguai</span>
   </div>
 </footer>
 
@@ -689,104 +702,257 @@
 
   document.getElementById('year').textContent = new Date().getFullYear();
 
-  // seletor de idioma (bandeiras) — visual por enquanto, traducao entra depois
-  const langNote = document.getElementById('langNote');
-  let langNoteTimer;
-  const langMsg = { en: 'English version coming soon', es: 'Versión en español, próximamente' };
-  document.querySelectorAll('.lang-switch button[data-lang]').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (btn.dataset.lang === 'pt') return;
-      langNote.textContent = langMsg[btn.dataset.lang];
-      langNote.classList.add('show');
-      clearTimeout(langNoteTimer);
-      langNoteTimer = setTimeout(() => langNote.classList.remove('show'), 2200);
-    });
-  });
+  // seletor de idioma — traducao completa EN/ES aplicada via data-i18n
+  const I18N = {
+    en: {
+      "nav.trajetoria": "Our Story", "nav.operacao": "Operations", "nav.parceria": "Partnership", "nav.galeria": "Gallery", "nav.contato": "Contact",
+      "header.cta": "Talk to our team", "header.ctaWhats": "Chat on WhatsApp",
+      "hero.eyebrow": "Since 1950 · Fazenda Cerejo, Angélica/MS · Fazenda Santana, Paraguay",
+      "hero.h1": "Six decades of evolution in <em>beef cattle farming</em>",
+      "hero.meta": "<span class=\"n\">Pioneering spirit, tradition and technology</span> united for real results in the field.",
+      "hero.scrollCue": "Scroll to explore",
+      "statement.kicker": "Our foundation",
+      "statement.text": "GN's foundation was consolidated in the 1960s, when smaller-scale paddocks broke away from the conventional management of the time. Today, high-precision agriculture and intensive feedlot operations work in <em>total synergy</em>.",
+      "trajetoria.imgAlt": "Cowboys on horseback, GN Agropecuária",
+      "trajetoria.caption": "Working on horseback at Fazenda Cerejo, at dawn.",
+      "trajetoria.kicker": "Our story",
+      "trajetoria.h2": "Roots in the 1960s, eyes on the <em>future of farming</em>",
+      "trajetoria.p1": "What began within the meatpacking ecosystem in 1950 evolved into an integrated production operation. We've crossed generations refining our processes, grounded in experience and focused on operational efficiency and sustainability in the field.",
+      "trajetoria.p2": "Today, two production units sustain this operation: Fazenda Cerejo, in Angélica, Mato Grosso do Sul, and Fazenda Santana, in Paraguay, combining traditional management, technology and cutting-edge automation.",
+      "numeros.kicker": "Our numbers", "numeros.h2": "Scale and precision <em>in every hectare</em>",
+      "numeros.stat0": "years of solid presence in the national beef supply chain, from Fazenda Cerejo to the demanding export market.",
+      "numeros.stat1": "production units: Fazenda Cerejo (MS) and Fazenda Santana (Paraguay)",
+      "numeros.stat2": "under high-precision agricultural management",
+      "numeros.stat3": "head in the feedlot's static capacity",
+      "numeros.stat4": "of feedlot pens with full automation",
+      "numeros.stat5": "operating under center-pivot irrigation",
+      "numeros.stat6": "sacks of proprietary grain storage capacity",
+      "numeros.stat7": "professionals rigorously running the field operation",
+      "numeros.paraguaiKicker": "Fazenda Santana · Paraguay",
+      "numeros.pystat0": "total area of the group's Paraguayan unit",
+      "numeros.pystat1": "allocated to precision agriculture",
+      "numeros.pystat2": "allocated to cattle raising, with backgrounding and intensive pasture finishing (TIP)",
+      "numeros.pystat3": "head in the total herd, including 2,000 in static TIP capacity",
+      "numeros.pystat4": "head slaughtered per year",
+      "operacao.kicker": "Our operation", "operacao.h2": "Three fronts, <em>one single engine</em>",
+      "operacao.lede": "Feedlot, agriculture and technology working in synergy to protect our partner producer's profitability.",
+      "operacao.card1.imgAlt": "Feed quality control at GN's feedlot", "operacao.card1.idx": "01 · Feedlot",
+      "operacao.card1.h3": "High-efficiency finishing",
+      "operacao.card1.p": "Rigorously balanced diets and automated infrastructure deliver standardized carcasses, optimizing the partner's cash flow and securing the best bonuses at industrial scale.",
+      "operacao.card2.imgAlt": "Center-pivot irrigation, precision agriculture at GN", "operacao.card2.idx": "02 · Agriculture",
+      "operacao.card2.h3": "Integrated field strategy",
+      "operacao.card2.p": "Sugarcane and grain crops managed with onboard telemetry and GPS-guided tractors, fully supplying the feedlot's nutritional demand.",
+      "operacao.card3.imgAlt": "Traceability and data, management at GN", "operacao.card3.idx": "03 · Management &amp; Technology",
+      "operacao.card3.h3": "Data-driven processes",
+      "operacao.card3.p": "Pasture monitoring software, automated feed bunk management and cost ERP. Every decision is backed by real metrics, maximizing average daily gain.",
+      "cine.kicker": "In motion", "cine.h2": "A glimpse of <em>Fazenda Cerejo</em>",
+      "cine.imgAlt": "Cowboys at sunset, GN Agropecuária",
+      "cine.caption": "Everyday scenes from Fazenda Cerejo, from sunrise at the corral to sunset over the pasture.",
+      "cine.src": "Showreel · Fazenda Cerejo, 2026",
+      "jornada.kicker": "Manifesto",
+      "jornada.p1": "For over half a century, we've learned that results-driven cattle farming cannot rest on superficial solutions. It demands consistency, technical depth, and respect for the time each process requires.",
+      "jornada.p2": "We were born within the beef production chain, we understand the machinery that drives it, and we translate that experience into worked land and feed bunk efficiency.",
+      "jornada.p3": "We don't follow the market passively; we prefer to set the pace, combining knowledge accumulated in the pasture with the precision of automated data.",
+      "jornada.p4": "Our feedlot isn't just a place to fatten cattle — it's the point of convergence where intelligent agriculture and zootechnical management meet to protect the producer's profitability.",
+      "jornada.p5": "We seek meaning in every hectare cultivated and purpose in every batch shipped.",
+      "jornada.p6": "We connect knowledge, optimize resources, and hold firm to our commitment to the truth of the land.",
+      "jornada.p7": "We move forward with awareness, delivering real value to those who plant the present and feed tomorrow.",
+      "pilares.kicker": "Why feed with GN", "pilares.h2": "Decisions with more <em>security</em> and efficiency",
+      "pilares.lede": "Structure, technology and partnership models to help producers make decisions with more security and efficiency.",
+      "pilares.p1.h3": "Better negotiation opportunities", "pilares.p1.p": "Different commercial strategies and terms aligned with the timing and profile of each operation.",
+      "pilares.p2.h3": "Greater predictability in finishing", "pilares.p2.p": "Technical follow-up, standardized management and continuous monitoring throughout the batch's stay.",
+      "pilares.p3.h3": "Better cash flow management", "pilares.p3.p": "Greater financial organization and predictability for production planning.",
+      "pilares.p4.h3": "Better use of farm land", "pilares.p4.p": "More flexibility to organize the use of pasture areas.",
+      "pilares.p5.h3": "Animal health and welfare", "pilares.p5.p": "Guaranteed proper management, monitoring and conditions for the batch's development.",
+      "pilares.p6.h3": "Structure and technology at your disposal", "pilares.p6.p": "Adequate infrastructure, standardized processes and technology to monitor the operation with full control.",
+      "pilares.p7.h3": "Transparency in operations", "pilares.p7.p": "Clarity in information, terms and the business relationship.",
+      "parceria.kicker": "Partnership terms", "parceria.h2": "Clear and <em>transparent</em> models",
+      "parceria.lede": "We work with commercial models that can be adjusted according to the profile, strategy and needs of each partner producer.",
+      "parceria.th0": "Condition / Detail", "parceria.th1": "KG/MS Model", "parceria.th2": "Standard Partnership",
+      "parceria.r0.0": "Minimum Batch", "parceria.r0.1": "100 head", "parceria.r0.2": "60 head",
+      "parceria.r1.0": "Quarantine", "parceria.r1.1": "Animals under quarantine will not be accepted", "parceria.r1.2": "Animals under quarantine will not be accepted",
+      "parceria.r2.0": "Inspection", "parceria.r2.1": "Per standard technical assessment", "parceria.r2.2": "Carried out by the Fazenda Cerejo team",
+      "parceria.r3.0": "Freight", "parceria.r3.1": "Deducted after slaughter (no out-of-pocket cost for the partner)", "parceria.r3.2": "Covered by the feedlot",
+      "parceria.r4.0": "Length of Stay", "parceria.r4.1": "Minimum 90 days / Maximum 120 days", "parceria.r4.2": "Minimum 90 days / Maximum 120 days",
+      "parceria.r5.0": "Health Protocol", "parceria.r5.1": "R$25.00 per head (deducted after slaughter)", "parceria.r5.2": "Covered by the feedlot",
+      "parceria.r6.0": "Liability for Deaths", "parceria.r6.1": "Deaths under the feedlot's management are paid based on entry average weight and 50% carcass yield. No coverage for natural deaths.", "parceria.r6.2": "As per the terms of GN's standard partnership agreement",
+      "parceria.r7.0": "Slaughter and Sales Channel", "parceria.r7.1": "Feedlot's partner meatpacking plants", "parceria.r7.2": "Feedlot's partner meatpacking plants",
+      "parceria.cta": "I want to know more",
+      "sustentabilidade.imgAlt": "Aerial view of Fazenda Cerejo's headquarters and feedlot",
+      "sustentabilidade.caption": "Fazenda Cerejo's headquarters and feedlot, seen from above.",
+      "sustentabilidade.kicker": "Sustainability", "sustentabilidade.h2": "Circular economy <em>in practice</em>",
+      "sustentabilidade.p1": "Organic waste generated at the feedlot is directed to composting in our own facility, where it undergoes a controlled transformation process. The resulting compost returns to the agricultural areas, contributing to soil fertility and efficient nutrient use.",
+      "sustentabilidade.p2": "The integration between cattle farming and agriculture allows a byproduct of the operation to be transformed into a production resource, promoting material reuse, process efficiency and more responsible management of natural resources.",
+      "sustentabilidade.tag1": "In-house composting", "sustentabilidade.tag2": "Nutrient reuse", "sustentabilidade.tag3": "Integration between cattle farming and agriculture",
+      "galeria.kicker": "Gallery", "galeria.h2": "Fazenda Cerejo <em>in images</em>",
+      "galeria.lede": "Stills and aerials of everyday life on the farm, from the corral to the pasture.",
+      "contato.kicker": "Contact", "contato.h2": "Find the right partnership model for your operation",
+      "contato.imgAlt": "GN Agropecuária team",
+      "contato.lede": "Talk to the GN team and learn about partnership opportunities for your herd.",
+      "contato.label.tel": "Phone / WhatsApp", "contato.label.email": "Email", "contato.label.insta": "Instagram", "contato.label.loc": "Location",
+      "contato.btnEmail": "Send an email",
+      "footer.rights": "All rights reserved.", "footer.locations": "Fazenda Cerejo, Angélica/MS · Fazenda Santana, Paraguay",
+      "_title": "GN Agropecuária: six decades of evolution in beef cattle farming",
+      "_desc": "GN Agropecuária: high-efficiency feedlot, precision agriculture and data-driven management. Six decades of tradition and technology in beef cattle farming."
+    },
+    es: {
+      "nav.trajetoria": "Nuestra Historia", "nav.operacao": "Operación", "nav.parceria": "Asociación", "nav.galeria": "Galería", "nav.contato": "Contacto",
+      "header.cta": "Hablar con el equipo", "header.ctaWhats": "Hablar por WhatsApp",
+      "hero.eyebrow": "Desde 1950 · Fazenda Cerejo, Angélica/MS · Fazenda Santana, Paraguay",
+      "hero.h1": "Seis décadas de evolución en la <em>ganadería de corte</em>",
+      "hero.meta": "<span class=\"n\">Pionerismo, tradición y tecnología</span> unidos para resultados concretos en el campo.",
+      "hero.scrollCue": "Desplázate para conocer",
+      "statement.kicker": "Nuestra base",
+      "statement.text": "La base de GN se consolidó en la década de 1960, cuando potreros de menor escala rompieron con el manejo convencional de la época. Hoy, la agricultura de alta precisión y el engorde intensivo operan en <em>total sinergia</em>.",
+      "trajetoria.imgAlt": "Vaqueros a caballo, GN Agropecuária",
+      "trajetoria.caption": "Manejo a caballo en Fazenda Cerejo, al amanecer.",
+      "trajetoria.kicker": "Nuestra historia",
+      "trajetoria.h2": "Raíces en la década de 1960, mirada puesta en el <em>futuro del campo</em>",
+      "trajetoria.p1": "Lo que nació dentro del ecosistema frigorífico en 1950 evolucionó hacia una operación productiva integrada. Cruzamos generaciones refinando procesos, con los pies afirmados en la experiencia y la mirada puesta en la eficiencia operativa y la sostenibilidad en el campo.",
+      "trajetoria.p2": "Hoy, dos unidades productivas sostienen esta operación: Fazenda Cerejo, en Angélica/MS, y Fazenda Santana, en Paraguay, combinando manejo tradicional, tecnología y automatización de punta.",
+      "numeros.kicker": "Nuestros números", "numeros.h2": "Escala y precisión <em>en cada hectárea</em>",
+      "numeros.stat0": "años de actuación sólida en la cadena ganadera nacional, desde Fazenda Cerejo hasta el exigente mercado de exportación.",
+      "numeros.stat1": "unidades productivas: Fazenda Cerejo (MS) y Fazenda Santana (Paraguay)",
+      "numeros.stat2": "bajo gestión agrícola de alta precisión técnica",
+      "numeros.stat3": "animales en capacidad estática del confinamiento",
+      "numeros.stat4": "de los corrales de confinamiento con automatización integral",
+      "numeros.stat5": "operando con riego de pivote central",
+      "numeros.stat6": "sacos de capacidad propia de almacenamiento de granos",
+      "numeros.stat7": "profesionales conduciendo con rigor la operación de campo",
+      "numeros.paraguaiKicker": "Fazenda Santana · Paraguay",
+      "numeros.pystat0": "área total de la unidad paraguaya del grupo",
+      "numeros.pystat1": "destinadas a la agricultura de precisión",
+      "numeros.pystat2": "destinadas a la ganadería, con recría y terminación intensiva a pasto (TIP)",
+      "numeros.pystat3": "animales en el rebaño total, con 2 mil en capacidad estática en la TIP",
+      "numeros.pystat4": "cabezas faenadas por año",
+      "operacao.kicker": "Nuestra operación", "operacao.h2": "Tres frentes, <em>un solo engranaje</em>",
+      "operacao.lede": "Confinamiento, agricultura y tecnología operando en sinergia para blindar la rentabilidad del productor asociado.",
+      "operacao.card1.imgAlt": "Control de calidad del alimento en el confinamiento de GN", "operacao.card1.idx": "01 · Confinamiento",
+      "operacao.card1.h3": "Terminación de alta eficiencia",
+      "operacao.card1.p": "Dietas rigurosamente balanceadas e infraestructura automatizada entregan canales estandarizadas, optimizando el flujo de caja del socio y garantizando las mejores bonificaciones a escala industrial.",
+      "operacao.card2.imgAlt": "Pivote central, agricultura de precisión en GN", "operacao.card2.idx": "02 · Agricultura",
+      "operacao.card2.h3": "Estrategia integrada en el campo",
+      "operacao.card2.p": "Cultivos de caña de azúcar y granos gestionados con telemetría embarcada y tractores con GPS, abasteciendo con control total la demanda nutricional del confinamiento.",
+      "operacao.card3.imgAlt": "Trazabilidad y datos, gestión en GN", "operacao.card3.idx": "03 · Gestión y Tecnología",
+      "operacao.card3.h3": "Procesos orientados por datos",
+      "operacao.card3.p": "Software de monitoreo de pasturas, automatización de comederos y ERP de costos. Cada decisión está respaldada por métricas reales, maximizando la ganancia media diaria.",
+      "cine.kicker": "En movimiento", "cine.h2": "Un vistazo a <em>Fazenda Cerejo</em>",
+      "cine.imgAlt": "Vaqueros al atardecer, GN Agropecuária",
+      "cine.caption": "Escenas del día a día en Fazenda Cerejo, desde el amanecer en el corral hasta el atardecer en el pasto.",
+      "cine.src": "Showreel · Fazenda Cerejo, 2026",
+      "jornada.kicker": "Manifiesto",
+      "jornada.p1": "Desde hace más de medio siglo aprendimos que la ganadería de resultados no se sostiene con soluciones superficiales. Exige consistencia, profundidad técnica y respeto por el tiempo que cada proceso demanda.",
+      "jornada.p2": "Nacimos dentro de la cadena productiva de la carne, entendemos el engranaje que la mueve y traducimos ese conocimiento en tierra trabajada y eficiencia de comedero.",
+      "jornada.p3": "No seguimos el mercado de forma pasiva; preferimos marcar el ritmo combinando el conocimiento acumulado en el pasto con la precisión de los datos automatizados.",
+      "jornada.p4": "Nuestro confinamiento no es solo un espacio de engorde, sino el punto de convergencia donde la agricultura inteligente y el manejo zootécnico se encuentran para blindar la rentabilidad del productor.",
+      "jornada.p5": "Buscamos sentido en cada hectárea cultivada y propósito en cada lote embarcado.",
+      "jornada.p6": "Conectamos saberes, optimizamos recursos y mantenemos un compromiso firme con la verdad de la tierra.",
+      "jornada.p7": "Avanzamos con conciencia para entregar valor real a quienes siembran el presente y alimentan el mañana.",
+      "pilares.kicker": "Por qué confinar con GN", "pilares.h2": "Decisiones con más <em>seguridad</em> y eficiencia",
+      "pilares.lede": "Estructura, tecnología y modelos de asociación para ayudar al productor a tomar decisiones con más seguridad y eficiencia.",
+      "pilares.p1.h3": "Mejores oportunidades de negociación", "pilares.p1.p": "Diferentes estrategias comerciales y condiciones alineadas al momento y al perfil de cada operación.",
+      "pilares.p2.h3": "Mayor previsibilidad en la terminación", "pilares.p2.p": "Seguimiento técnico, manejo estandarizado y monitoreo continuo durante la permanencia del lote.",
+      "pilares.p3.h3": "Mejor gestión del flujo de caja", "pilares.p3.p": "Mayor organización financiera y previsibilidad para la planificación de la producción.",
+      "pilares.p4.h3": "Aprovechamiento de las áreas de la finca", "pilares.p4.p": "Más flexibilidad para organizar el uso de las áreas de pastoreo.",
+      "pilares.p5.h3": "Sanidad y bienestar animal", "pilares.p5.p": "Garantía de manejo adecuado, seguimiento y condiciones para el desarrollo del lote.",
+      "pilares.p6.h3": "Estructura y tecnología a disposición", "pilares.p6.p": "Infraestructura adecuada, procesos estandarizados y tecnología para seguir la operación con control total.",
+      "pilares.p7.h3": "Transparencia en la operación", "pilares.p7.p": "Claridad en la información, en las condiciones y en la relación comercial.",
+      "parceria.kicker": "Condiciones de asociación", "parceria.h2": "Modelos claros y <em>transparentes</em>",
+      "parceria.lede": "Trabajamos con modelos comerciales que pueden ajustarse según el perfil, la estrategia y las necesidades de cada productor asociado.",
+      "parceria.th0": "Condición / Detalle", "parceria.th1": "Modalidad KG/MS", "parceria.th2": "Asociación Estándar",
+      "parceria.r0.0": "Lote Mínimo", "parceria.r0.1": "100 animales", "parceria.r0.2": "60 animales",
+      "parceria.r1.0": "Cuarentena", "parceria.r1.1": "No se aceptarán animales en cuarentena", "parceria.r1.2": "No se aceptarán animales en cuarentena",
+      "parceria.r2.0": "Inspección", "parceria.r2.1": "Según evaluación técnica estándar", "parceria.r2.2": "Realizada por el equipo de Fazenda Cerejo",
+      "parceria.r3.0": "Flete", "parceria.r3.1": "Descontado después de la faena (sin desembolso del socio)", "parceria.r3.2": "A cargo del confinamiento",
+      "parceria.r4.0": "Tiempo de Permanencia", "parceria.r4.1": "Mínimo 90 días / Máximo 120 días", "parceria.r4.2": "Mínimo 90 días / Máximo 120 días",
+      "parceria.r5.0": "Protocolo Sanitario", "parceria.r5.1": "R$ 25,00 por animal (descontado después de la faena)", "parceria.r5.2": "A cargo del confinamiento",
+      "parceria.r6.0": "Responsabilidad por Muertes", "parceria.r6.1": "Las muertes bajo gestión del confinamiento se pagan según el peso medio de entrada y el 50% de rendimiento de canal. Sin cobertura para muertes naturales.", "parceria.r6.2": "Según los términos del contrato estándar de asociación agropecuaria de GN",
+      "parceria.r7.0": "Faena y Canal de Venta", "parceria.r7.1": "Plantas frigoríficas asociadas al confinamiento", "parceria.r7.2": "Plantas frigoríficas asociadas al confinamiento",
+      "parceria.cta": "Quiero saber más",
+      "sustentabilidade.imgAlt": "Vista aérea de la sede y el confinamiento de Fazenda Cerejo",
+      "sustentabilidade.caption": "La sede y el confinamiento de Fazenda Cerejo, vistos desde el aire.",
+      "sustentabilidade.kicker": "Sostenibilidad", "sustentabilidade.h2": "Economía circular <em>aplicada</em>",
+      "sustentabilidade.p1": "Los residuos orgánicos generados en el confinamiento se destinan al compostaje en una estructura propia, donde pasan por un proceso controlado de transformación. El compost resultante regresa a las áreas agrícolas, contribuyendo a la fertilidad del suelo y al aprovechamiento eficiente de los nutrientes.",
+      "sustentabilidade.p2": "La integración entre ganadería y agricultura permite transformar un subproducto de la operación en un recurso para la producción, promoviendo el aprovechamiento de materiales, la eficiencia de los procesos y una gestión más responsable de los recursos naturales.",
+      "sustentabilidade.tag1": "Compostaje propio", "sustentabilidade.tag2": "Aprovechamiento de nutrientes", "sustentabilidade.tag3": "Integración entre ganadería y agricultura",
+      "galeria.kicker": "Galería", "galeria.h2": "Fazenda Cerejo <em>en imágenes</em>",
+      "galeria.lede": "Fotos y aéreas del día a día de la finca, del corral al pasto.",
+      "contato.kicker": "Contacto", "contato.h2": "Encuentra el modelo de asociación adecuado para tu operación",
+      "contato.imgAlt": "Equipo de GN Agropecuária",
+      "contato.lede": "Habla con el equipo de GN y conoce las posibilidades de asociación para tu rebaño.",
+      "contato.label.tel": "Teléfono / WhatsApp", "contato.label.email": "Correo electrónico", "contato.label.insta": "Instagram", "contato.label.loc": "Ubicación",
+      "contato.btnEmail": "Enviar correo",
+      "footer.rights": "Todos los derechos reservados.", "footer.locations": "Fazenda Cerejo, Angélica/MS · Fazenda Santana, Paraguay",
+      "_title": "GN Agropecuária: seis décadas de evolución en la ganadería de corte",
+      "_desc": "GN Agropecuária: confinamiento de alta eficiencia, agricultura de precisión y gestión basada en datos. Seis décadas de tradición y tecnología en la ganadería de corte."
+    }
+  };
 
-  // statement: horizontal scroll-scrub with blur, inside pinned section
-  const statementSection = document.getElementById('statementSection');
-  const statementText = document.getElementById('statementText');
-  let statementTicking = false;
-  function updateStatement() {
-    const rect = statementSection.getBoundingClientRect();
-    const total = rect.height - window.innerHeight;
-    let p = total > 0 ? (-rect.top) / total : 0;
-    p = Math.min(1, Math.max(0, p));
-    const translate = (1 - p) * 34; // vw: comeca deslocado a direita, termina centralizado
-    let blur = 0, opacity = 1;
-    if (p < 0.14) { blur = (0.14 - p) / 0.14 * 10; opacity = Math.max(0, p / 0.14); }
-    else if (p > 0.82) { blur = (p - 0.82) / 0.18 * 12; opacity = Math.max(0, (1 - p) / 0.18); }
-    statementText.style.transform = `translateX(${translate}vw)`;
-    statementText.style.filter = `blur(${blur}px)`;
-    statementText.style.opacity = opacity;
-    statementTicking = false;
+  const i18nEls = document.querySelectorAll('[data-i18n]');
+  const i18nAltEls = document.querySelectorAll('[data-i18n-alt]');
+  const i18nOriginal = new Map();
+  i18nEls.forEach(el => i18nOriginal.set(el, el.innerHTML));
+  const i18nAltOriginal = new Map();
+  i18nAltEls.forEach(el => i18nAltOriginal.set(el, el.getAttribute('alt')));
+  const ORIGINAL_TITLE = document.title;
+  const ORIGINAL_DESC = document.querySelector('meta[name="description"]').getAttribute('content');
+
+  function applyLang(lang) {
+    const dict = I18N[lang];
+    i18nEls.forEach(el => {
+      if (lang === 'pt' || !dict) { el.innerHTML = i18nOriginal.get(el); return; }
+      const key = el.dataset.i18n;
+      if (dict[key] != null) el.innerHTML = dict[key];
+    });
+    i18nAltEls.forEach(el => {
+      if (lang === 'pt' || !dict) { el.setAttribute('alt', i18nAltOriginal.get(el)); return; }
+      const key = el.dataset.i18nAlt;
+      if (dict[key] != null) el.setAttribute('alt', dict[key]);
+    });
+    document.documentElement.lang = lang === 'en' ? 'en' : (lang === 'es' ? 'es' : 'pt-BR');
+    document.title = (dict && dict['_title']) || ORIGINAL_TITLE;
+    document.querySelector('meta[name="description"]').setAttribute('content', (dict && dict['_desc']) || ORIGINAL_DESC);
+    document.querySelectorAll('.lang-switch button').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+    try { localStorage.setItem('gnLang', lang); } catch (e) {}
   }
-  window.addEventListener('scroll', () => {
-    if (!statementTicking) { requestAnimationFrame(updateStatement); statementTicking = true; }
+
+  document.querySelectorAll('.lang-switch button[data-lang]').forEach(btn => {
+    btn.addEventListener('click', () => applyLang(btn.dataset.lang));
   });
-  updateStatement();
 
-  // seqhero — video-scrub via canvas: o scroll avanca e recua entre os quadros do motion-abertura.mp4
-  const seqheroSection = document.getElementById('home');
-  if (seqheroSection) {
-    const shFrameCount = 121;
-    const shTextRevealFrac = 0.78; // ultimos ~22% do scroll (aereo/confinamento/animal) revelam o texto
-    const shPin = seqheroSection.querySelector('.seqhero-pin');
-    const shCanvas = document.getElementById('seqheroCanvas');
-    const shCtx = shCanvas.getContext('2d');
-    const shText = document.getElementById('seqheroText');
-    const shFill = document.getElementById('seqheroFill');
+  let savedLang = 'pt';
+  try { savedLang = localStorage.getItem('gnLang') || 'pt'; } catch (e) {}
+  if (savedLang !== 'pt') applyLang(savedLang);
 
-    const shImages = [];
-    for (let i = 1; i <= shFrameCount; i++) {
-      const img = new Image();
-      img.src = 'images/seqvid/f' + String(i).padStart(3, '0') + '.jpg';
-      shImages.push(img);
-    }
-
-    function shResize() {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
-      shCanvas.width = shPin.clientWidth * dpr;
-      shCanvas.height = shPin.clientHeight * dpr;
-      shDrawFrame(shCurrentIdx < 0 ? 0 : shCurrentIdx);
-    }
-
-    function shDrawFrame(idx) {
-      const img = shImages[idx];
-      if (!img || !img.complete || !img.naturalWidth) return;
-      const cw = shCanvas.width, ch = shCanvas.height;
-      const iw = img.naturalWidth, ih = img.naturalHeight;
-      const scale = Math.max(cw / iw, ch / ih);
-      const dw = iw * scale, dh = ih * scale;
-      shCtx.clearRect(0, 0, cw, ch);
-      shCtx.drawImage(img, (cw - dw) / 2, (ch - dh) / 2, dw, dh);
-    }
-
-    let shCurrentIdx = -1;
-    let shTicking = false;
-    function updateSeqhero() {
-      const rect = seqheroSection.getBoundingClientRect();
-      const total = rect.height - window.innerHeight;
-      let p = total > 0 ? (-rect.top) / total : 0;
-      p = Math.min(1, Math.max(0, p));
-      const idx = Math.min(shFrameCount - 1, Math.round(p * (shFrameCount - 1)));
-      if (idx !== shCurrentIdx) {
-        shCurrentIdx = idx;
-        shDrawFrame(idx);
-      }
-      shFill.style.width = (p * 100) + '%';
-      shCanvas.classList.toggle('idle', p < 0.015);
-      shText.classList.toggle('active', p >= shTextRevealFrac);
-      shTicking = false;
-    }
-
-    shImages[0].onload = () => shDrawFrame(0);
-    window.addEventListener('resize', shResize);
-    window.addEventListener('scroll', () => {
-      if (!shTicking) { requestAnimationFrame(updateSeqhero); shTicking = true; }
+  // hero slider — fotos alternando sozinhas, sem depender do scroll
+  const heroSlider = document.getElementById('home');
+  if (heroSlider) {
+    const hsSlides = heroSlider.querySelectorAll('.hs-slide');
+    const hsDots = document.getElementById('hsDots');
+    hsSlides.forEach((s, i) => {
+      const dot = document.createElement('span');
+      dot.dataset.i = i;
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => goToSlide(i, true));
+      hsDots.appendChild(dot);
     });
-    shResize();
-    updateSeqhero();
+    const hsDotEls = hsDots.querySelectorAll('span');
+    let hsCurrent = 0;
+    let hsTimer;
+    function goToSlide(i, manual) {
+      hsSlides[hsCurrent].classList.remove('active');
+      hsDotEls[hsCurrent].classList.remove('active');
+      hsCurrent = i;
+      hsSlides[hsCurrent].classList.add('active');
+      hsDotEls[hsCurrent].classList.add('active');
+      if (manual) restartHsTimer();
+    }
+    function nextSlide() { goToSlide((hsCurrent + 1) % hsSlides.length, false); }
+    function restartHsTimer() {
+      clearInterval(hsTimer);
+      hsTimer = setInterval(nextSlide, 6500);
+    }
+    restartHsTimer();
   }
 
   // jornada — sequencia cinematografica pinada (manifesto como experiencia de scroll)
@@ -794,7 +960,6 @@
   if (jornadaSection) {
     const stageCount = 7;
     const jLayers = jornadaSection.querySelectorAll('.jornada-layer');
-    const jTexts = jornadaSection.querySelectorAll('.jornada-text, .jornada-big');
     const jProgress = document.getElementById('jornadaProgress');
     for (let i = 0; i < stageCount; i++) {
       const dot = document.createElement('span');
@@ -813,7 +978,6 @@
       if (stage !== jCurrentStage) {
         jCurrentStage = stage;
         jLayers.forEach(l => l.classList.toggle('active', +l.dataset.stage === stage));
-        jTexts.forEach(t => t.classList.toggle('active', +t.dataset.stage === stage));
         jDots.forEach(d => d.classList.toggle('active', +d.dataset.stage === stage));
       }
       jTicking = false;
@@ -840,22 +1004,6 @@
   });
   cineVideo.addEventListener('pause', () => { if (cineVideo.currentTime > 0 && !cineVideo.ended) return; });
   cineVideo.addEventListener('ended', () => cineFrame.classList.remove('playing'));
-
-  // parceria tabs — filtra a coluna exibida (Modalidade KG/MS ou Parceria Padrão) em qualquer tela
-  const tabBtns = document.querySelectorAll('.tab-btn');
-  const table = document.getElementById('parceriaTable');
-  function setCol(idx) {
-    tabBtns.forEach(b => b.classList.toggle('active', b.dataset.col == idx));
-    table.querySelectorAll('tr').forEach(row => {
-      const cells = row.querySelectorAll('th,td');
-      cells.forEach((cell, i) => {
-        if (i === 0) return;
-        cell.style.display = (i === (idx == 0 ? 1 : 2)) ? '' : 'none';
-      });
-    });
-  }
-  tabBtns.forEach(b => b.addEventListener('click', () => setCol(b.dataset.col)));
-  setCol(0);
 
   // galeria
   const gCount = 24;
